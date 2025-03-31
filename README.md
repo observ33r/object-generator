@@ -6,7 +6,7 @@ High-performance, customizable dummy object generator for testing and benchmarki
 
 Install the package via npm:
 
-`npm install object-generator`
+`npm install @observ33r/object-generator`
 
 ## Usage
 
@@ -35,7 +35,7 @@ Install the package via npm:
 #### Generate a simple nested Object
  
 ```javascript
-import { objectGenerator } from 'object-generator';
+import { objectGenerator } from '@observ33r/object-generator';
 
 const obj = objectGenerator({
   preffix: 'data',
@@ -66,7 +66,7 @@ console.log(obj);
 
 
 ```javascript
-import { objectGenerator } from 'object-generator';
+import { objectGenerator } from '@observ33r/object-generator';
 
 const arr = objectGenerator({
   type: Array,
@@ -89,7 +89,7 @@ console.log(arr);
 #### Generate a repeatable shuffled and nested Set without a global index
 
 ```javascript
-import { objectGenerator } from 'object-generator';
+import { objectGenerator } from '@observ33r/object-generator';
 
 const set = objectGenerator({
   type: Set,
