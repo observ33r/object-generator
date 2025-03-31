@@ -1,0 +1,35 @@
+{
+  "name": "object-generator",
+  "version": "1.0.0",
+  "description": "High-performance, customizable dummy object generator for testing and benchmarking.",
+  "type": "module",
+  "main": "src/objectGenerator.mjs",
+  "types": "src/objectGenerator.d.mts",
+  "files": [
+    "src/objectGenerator.mjs", 
+    "src/objectGenerator.d.mts", 
+    "LICENSE", 
+    "README.md"
+  ],
+  "keywords": [
+    "dummy-data",
+    "object-generator",
+    "benchmark",
+    "testing"
+  ],
+  "author": "David Čuček <observ33r@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/observ33r/object-generator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/observ33r/object-generator/issues"
+  },
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
