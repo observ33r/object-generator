@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/%40observ33r%2Fobject-generator.svg)](https://www.npmjs.com/package/@observ33r/object-generator)
+
 # object-generator
 
 High-performance, customizable dummy object generator for testing and benchmarking.
@@ -20,7 +22,7 @@ Install the package via npm:
   - `size` {number} The size of the top-level object. Must be an integer. **Default:** `16`.
   - `nestedSize` {number} The size of nested objects. Must be an integer. **Default:** `16`.
   - `depth` {number} The maximum depth for nested structures. Must be an integer. **Default:** `0`.
-  - `valueTypes` {Array<Function|NaN|undefined|null>}> Array of value types to include in the generated object. Valid types are `Boolean`, `Number`, `String`, `Date`, `RegExp`, `Uint8Array`, `Object`, `Array`, `Set`, `Map`, `NaN`, `undefined`, or `null`. **Default:** `[String]`.
+  - `valueTypes` {Array<Function|NaN|undefined|null>} Array of value types to include in the generated object. Valid types are `Boolean`, `Number`, `String`, `Date`, `RegExp`, `Uint8Array`, `Object`, `Array`, `Set`, `Map`, `NaN`, `undefined`, or `null`. **Default:** `[String]`.
   - `globalIndex` {boolean} Whether to include a global index in generated keys/values. **Default:** `true`.
   - `circular` {boolean} Whether to allow circular references in the generated object. **Default:** `false`.
   - `shuffle` {boolean} Whether to shuffle the order of elements or keys. **Default:** `false`.
