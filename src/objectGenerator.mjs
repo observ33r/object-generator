@@ -9,8 +9,8 @@ const seedMul = 1664525, seedInc = 1013904223, seedDiv = 4294967296;
 export function objectGenerator(options) {
     if (options == null || typeof options !== 'object') 
         options = {};
-    const preffix = (typeof options.preffix === 'string' 
-        && options.preffix.length > 0) ? options.preffix : false;
+    const prefix = (typeof options.prefix === 'string' && options.prefix.length > 0 
+        || typeof options.prefix === 'number') ? options.prefix : false;
     const objectType = objectTypes.includes(options.type) 
         ? options.type : Object;
     const size = Math.max(0, Number.isInteger(options.size) 
@@ -23,7 +23,7 @@ export function objectGenerator(options) {
         ? options.valueTypes : [String];
     const validValueTypes = allTypes.filter(type => 
         valueTypes.includes(type));
-    const validObjectTypes = allTypes.filter(type => 
+    const validNestedTypes = allTypes.filter(type => 
         nestedTypes.includes(type));
     const globalIndex = (options.globalIndex !== false);
     const circular = (options.circular === true);
@@ -37,12 +37,12 @@ export function objectGenerator(options) {
         ? options.level : 0;
     if (level === 0)
         globalIdx = -1;
-    if (validObjectTypes.length === 0 && level < depth) 
-        validObjectTypes.push(Object);
+    if (validNestedTypes.length === 0 && level < depth) 
+        validNestedTypes.push(Object);
     const objectSize = (level > 0) 
         ? nestedSize : size;
-    const types = (level < depth)
-        ? validValueTypes.slice(0, Math.max(0, objectSize - validObjectTypes.length)).concat(validObjectTypes)
+    const types = (level < depth || circular)
+        ? validValueTypes.slice(0, Math.max(0, objectSize - validNestedTypes.length)).concat(validNestedTypes)
         : (validValueTypes.length > 0) 
             ? validValueTypes : [String];
     const typesSize = types.length;
@@ -53,7 +53,8 @@ export function objectGenerator(options) {
         : new objectType();
     const usedIndices = (shuffle) 
         ? new Set() : null;
-    for (let idx, objectIdx = 0; objectIdx < objectSize; objectIdx++) {
+    let idx, key, value, typeName;
+    for (let objectIdx = 0; objectIdx < objectSize; objectIdx++) {
         if (shuffle) {
             do {
                 seed = (seedMul * seed + seedInc) % seedDiv;
@@ -66,19 +67,23 @@ export function objectGenerator(options) {
             operand[objectIdx] = idx % 256;
             continue;
         }
-        let key, value, typeName; globalIdx++;
+        globalIdx++;
         const suffix = (depth > 0)
             ? (globalIndex)
                 ? `${size}-${level}-${globalIdx}-${idx}` 
                 : `${size}-${level}-${idx}` 
             : `${size}-${idx}`;
         const type = types[idx % typesSize];
-        if (circular && globalIdx % typesSizeDiv === 0 && nestedTypes.includes(type)) {
+        if (
+            circular 
+            && (level === depth - 1 || globalIdx % typesSizeDiv === 0) 
+            && validNestedTypes.includes(type)
+        ) {
             typeName = type.name.toLowerCase();
             switch (objectType) {
                 case Object: 
-                    key = (preffix)
-                        ? `${preffix}-${typeName}-${suffix}`
+                    key = (prefix !== false)
+                        ? `${prefix}-${typeName}-${suffix}`
                         : `${typeName}-${suffix}`;
                     operand[key] = operand; 
                     break;
@@ -86,8 +91,8 @@ export function objectGenerator(options) {
                     operand.push(operand); 
                     break;
                 case Map: 
-                    key = (preffix)
-                        ? `${preffix}-${typeName}-${suffix}`
+                    key = (prefix !== false)
+                        ? `${prefix}-${typeName}-${suffix}`
                         : `${typeName}-${suffix}`;
                     operand.set(key, operand); 
                     break;
@@ -108,8 +113,8 @@ export function objectGenerator(options) {
                 break;
             case String:
                 typeName = 'string';
-                value = (preffix)
-                    ? `${preffix}-value-${suffix}`
+                value = (prefix !== false)
+                    ? `${prefix}-value-${suffix}`
                     : `value-${suffix}`;
                 break;
             case Date: 
@@ -120,8 +125,8 @@ export function objectGenerator(options) {
                 break;
             case RegExp:
                 typeName = 'regexp';
-                const pattern = (preffix)
-                    ? `${preffix}-pattern-${suffix}`
+                const pattern = (prefix !== false)
+                    ? `${prefix}-pattern-${suffix}`
                     : `pattern-${suffix}`;
                 value = new RegExp(pattern, 'g');
                 break;
@@ -151,8 +156,8 @@ export function objectGenerator(options) {
         switch (objectType) {
             case Uint8Array: 
             case Object: 
-                key = (preffix)
-                    ? `${preffix}-${typeName}-${suffix}`
+                key = (prefix !== false)
+                    ? `${prefix}-${typeName}-${suffix}`
                     : `${typeName}-${suffix}`;
                 operand[key] = value; 
                 break;
@@ -160,8 +165,8 @@ export function objectGenerator(options) {
                 operand.push(value); 
                 break;
             case Map: 
-                key = (preffix)
-                    ? `${preffix}-${typeName}-${suffix}`
+                key = (prefix !== false)
+                    ? `${prefix}-${typeName}-${suffix}`
                     : `${typeName}-${suffix}`;
                 operand.set(key, value); 
                 break;

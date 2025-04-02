@@ -11,7 +11,7 @@ interface GeneratorOptions {
     * A prefix to prepend to generated keys/strings.
     * @default false
     */
-    preffix?: string | false;
+    prefix?: string | number | false;
 
     /**
     * The type of object to generate.
