@@ -154,7 +154,6 @@ export function objectGenerator(options) {
                 break;
         }
         switch (objectType) {
-            case Uint8Array: 
             case Object: 
                 key = (prefix !== false)
                     ? `${prefix}-${typeName}-${suffix}`
