@@ -1,38 +1,59 @@
 [![npm version](https://badge.fury.io/js/%40observ33r%2Fobject-generator.svg)](https://www.npmjs.com/package/@observ33r/object-generator)
+[![Size](https://badgen.net/bundlephobia/minzip/@observ33r/object-generator)](https://bundlephobia.com/package/@observ33r/object-generator)
+[![License](https://img.shields.io/npm/l/@observ33r/object-generator.svg)](https://github.com/observ33r/object-generator/blob/main/LICENSE)
 
 # object-generator
 
 High-performance, customizable dummy object generator for testing and benchmarking.
 
+## Features
+
+- **Guaranteed Structure Consistency**  
+  The `nestedSize` and `depth` options are always respected, ensuring consistent object structures even when circular references are enabled with `circular: true`. This guarantees predictable output regardless of configuration.
+
+- **Globally Unique Identifiers**  
+  With `globalIndex: true`, all keys and string values remain unique across the generated object. This uniqueness eliminates ambiguity and ensures reliable comparisons or traversals.
+
+- **Real-World Object Design**  
+  Objects are crafted to mimic real-world data structures as closely as possible. This approach avoids overly simplistic or uniform patterns that could trigger JIT (Just-In-Time) compiler optimizations, making the generator ideal for robust benchmarking and testing scenarios.
+
+- **Performance Testing Ready**  
+  Designed for benchmark challenges between libraries by providing diverse and repeatable complex objects!
+
+- **Type-Safe**  
+  Fully typed with TypeScript declarations.
+
 ## Installation
 
 Install the package via npm:
 
-`npm install @observ33r/object-generator`
+```bash
+npm install @observ33r/object-generator`
+```
 
 ## Usage
 
-### objectGenerator(options) 
+### `objectGenerator([options])`
 
-#### Parameters
+- **options**: Optional configuration object (see below).
+- **Returns**: `Object | Array | Set | Map | Uint8Array` - An object of the specified type with generated content based on the provided options.
 
-- `options` {Object} Optional configuration for the generator.
-  - `prefix` {string|number|false} A prefix to prepend to generated keys/strings. Must be a non-empty string, number or `false`. **Default:** `false`.
-  - `type` {Function} The type of object to generate. Must be one of `Object`, `Array`, `Set`, `Map` or `Uint8Array`. **Default:** `Object`.
-  - `size` {number} The size of the top-level object. Must be an integer. **Default:** `16`.
-  - `nestedSize` {number} The size of nested objects. Must be an integer. **Default:** `16`.
-  - `depth` {number} The maximum depth for nested structures. Must be an integer. **Default:** `0`.
-  - `valueTypes` {Array<Function|NaN|undefined|null>} Array of value types to include in the generated object. Valid types are `Boolean`, `Number`, `String`, `Date`, `RegExp`, `Uint8Array`, `Object`, `Array`, `Set`, `Map`, `NaN`, `undefined` or `null`. **Default:** `[String]`.
-  - `globalIndex` {boolean} Whether to include a global index in generated keys/values. **Default:** `true`.
-  - `circular` {boolean} Whether to allow circular references in the generated object. **Default:** `false`.
-  - `shuffle` {boolean} Whether to shuffle the order of elements or keys. **Default:** `false`.
-  - `seed` {number} Seed for randomization when `shuffle` is enabled. If not provided, a random seed is generated. **Default:** Random value if `shuffle` is `true`.
+#### Options
 
-#### Returns
+| Property | Type | Default | Description |
+| :---: | :---: | :---: | :--- |
+| prefix | `string \| number \| false` | `false`| A prefix to prepend to generated keys/strings. Must be a non-empty string, number or `false`. |
+| type | `constructor` | `Object` | The type of object to generate. Must be one of `Object`, `Array`, `Set`, `Map`, or `Uint8Array`. |
+| size | `number` | `16` | Size of the top-level object. Must be an integer. |
+| nestedSize | `number` | `16` | Size of nested objects. Must be an integer. |
+| depth | `number` | `0` | Maximum depth for nested structures. Must be an integer.|
+| valueTypes | `[constructor \| NaN \| undefined \| null]` | `[String]` | Types of values to include: `Boolean`, `Number`, `String`, `Date`, `RegExp`, `Uint8Array`, `Object`, `Array`, `Set`, `Map`, `NaN`, `undefined`, `null`. |
+| globalIndex | `boolean` | `true` | Whether to include a global index in generated keys/values. |
+| circular | `boolean` | `false` | Whether to allow circular references in the generated object. |
+| shuffle | `boolean` | `false` | Whether to shuffle the order of elements or keys. |
+| seed | `number` | *random* | Seed for randomization when `shuffle` is enabled. If not provided, a random seed is used. |
 
-- {Object|Array|Set|Map|Uint8Array} An object of the specified type with generated content based on the provided options.
-
-### Examples
+## Examples
 
 #### Generate a simple Object
  
@@ -164,25 +185,25 @@ Set(2) {
 }
 ```
 
-## Notes
+## Build
 
-- **Guaranteed Structure Consistency**  
-  The `nestedSize` and `depth` options are always respected, ensuring consistent object structures even when circular references are enabled with `circular: true`. This guarantees predictable output regardless of configuration.
+This package uses [rollup](https://rollupjs.org/) to generate clean and optimized ESM builds. 
 
-- **Globally Unique Identifiers**  
-  With `globalIndex: true`, all keys and string values remain unique across the generated object. This uniqueness eliminates ambiguity and ensures reliable comparisons or traversals.
+To build package from source code, run:
 
-- **Real-World Object Design**  
-  Objects are crafted to mimic real-world data structures as closely as possible. This approach avoids overly simplistic or uniform patterns that could trigger JIT (Just-In-Time) compiler optimizations, making the generator ideal for robust benchmarking and testing scenarios.
-
-- **Performance Testing Ready**  
-  Designed for benchmark challenges between libraries by providing diverse and repeatable complex objects!
+```bash
+npm run build
+```
 
 ## Testing
 
-Run the included tests with Jest:
+All tests are written in [Vitest](https://vitest.dev) with native ESM support and zero transform overhead.
 
-`npm test`
+You can run the full suite with:
+
+```bash
+npm test
+```
 
 ## Contributing
 
