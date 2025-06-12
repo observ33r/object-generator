@@ -5,6 +5,7 @@
   "type": "module",
   "main": "dist/object-generator.esm.js",
   "types": "dist/object-generator.d.ts",
+  "sideEffects": false,
   "files": [
     "dist",
     "LICENSE",
