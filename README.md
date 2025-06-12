@@ -125,7 +125,6 @@ console.log(arr);
 
 #### Generate a repeatable shuffled Typed Array
 
-
 ```javascript
 import { objectGenerator } from '@observ33r/object-generator';
 
@@ -140,6 +139,8 @@ const typedArray = objectGenerator({
 console.log(typedArray);
 //or ArrayBuffer
 console.log(typedArray.buffer);
+//or DataView
+console.log(new DataView(typedArray.buffer));
 ```
 ```console
 Uint8Array(8) [
@@ -151,6 +152,16 @@ Uint8Array(8) [
 ArrayBuffer {
   [Uint8Contents]: <02 00 04 01 03 06 07 05>,
   byteLength: 8
+}
+```
+```console
+DataView {
+  byteLength: 8,
+  byteOffset: 0,
+  buffer: ArrayBuffer {
+    [Uint8Contents]: <02 00 04 01 03 06 07 05>,
+    byteLength: 8
+  }
 }
 ```
 
