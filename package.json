@@ -11,10 +11,21 @@
     "README.md"
   ],
   "keywords": [
-    "dummy-data",
     "object-generator",
-    "benchmark",
-    "testing"
+    "data-generator",
+    "dummy-data",
+    "mock-data",
+    "test-data",
+    "nested-object",
+    "deep-object",
+    "random-object",
+    "typed-array",
+    "benchmarking",
+    "performance-testing",
+    "unit-testing",
+    "fuzzing",
+    "circular-references",
+    "javascript"
   ],
   "author": "David Čuček <observ33r@gmail.com>",
   "license": "MIT",
