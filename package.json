@@ -1,6 +1,6 @@
 {
   "name": "@observ33r/object-generator",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "High-performance, customizable dummy object generator for testing and benchmarking.",
   "type": "module",
   "main": "dist/object-generator.esm.js",
