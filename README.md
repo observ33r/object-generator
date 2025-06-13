@@ -1,4 +1,4 @@
-[![npm version](https://badge.fury.io/js/%40observ33r%2Fobject-generator.svg)](https://www.npmjs.com/package/@observ33r/object-generator)
+[![npm](https://img.shields.io/npm/v/@observ33r/object-generator.svg)](https://www.npmjs.com/package/@observ33r/object-generator)
 [![Size](https://badgen.net/bundlephobia/minzip/@observ33r/object-generator)](https://bundlephobia.com/package/@observ33r/object-generator)
 [![License](https://img.shields.io/npm/l/@observ33r/object-generator.svg)](https://github.com/observ33r/object-generator/blob/main/LICENSE)
 
@@ -28,7 +28,7 @@ High-performance, customizable dummy object generator for testing and benchmarki
 Install the package via npm:
 
 ```bash
-npm install @observ33r/object-generator`
+npm install @observ33r/object-generator
 ```
 
 ## Usage
@@ -36,7 +36,7 @@ npm install @observ33r/object-generator`
 ### `objectGenerator([options])`
 
 - **options**: Optional configuration object (see below).
-- **Returns**: `Object | Array | Set | Map | Uint8Array` - An object of the specified type with generated content based on the provided options.
+- **Returns**: An object of the specified type with generated content based on the provided options.
 
 #### Options
 
@@ -47,7 +47,7 @@ npm install @observ33r/object-generator`
 | size | `number` | `16` | Size of the top-level object. Must be an integer. |
 | nestedSize | `number` | `16` | Size of nested objects. Must be an integer. |
 | depth | `number` | `0` | Maximum depth for nested structures. Must be an integer.|
-| valueTypes | `[constructor \| NaN \| undefined \| null]` | `[String]` | Types of values to include: `Boolean`, `Number`, `String`, `Date`, `RegExp`, `Uint8Array`, `Object`, `Array`, `Set`, `Map`, `NaN`, `undefined`, `null`. |
+| valueTypes | `[constructor \| NaN \| undefined \| null]` | `[String]` | Array of value types to include: `Boolean`, `Number`, `String`, `Date`, `RegExp`, `Uint8Array`, `Object`, `Array`, `Set`, `Map`, `NaN`, `undefined`, `null`. |
 | globalIndex | `boolean` | `true` | Whether to include a global index in generated keys/values. |
 | circular | `boolean` | `false` | Whether to allow circular references in the generated object. |
 | shuffle | `boolean` | `false` | Whether to shuffle the order of elements or keys. |
